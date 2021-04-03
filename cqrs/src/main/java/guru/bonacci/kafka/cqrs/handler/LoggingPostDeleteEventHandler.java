@@ -1,25 +1,21 @@
 package guru.bonacci.kafka.cqrs.handler;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.kafka.cqrs.mvc.OrderServ;
+import guru.bonacci.kafka.cqrs.mvc.OrderStuff;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
 public class LoggingPostDeleteEventHandler extends AbstractPostDeleteEventHandler {
 
-	@Override
+	@Autowired OrderServ serv;
+	
+    @Override
     public void run() {
-        System.out.println("------HIBERNATE EVENT------");
-        System.out.println("Thread ID of event listener: " + Thread.currentThread().getId());
-
-        StringBuilder sb = new StringBuilder();
-        sb.append("Delete entity ")
-                .append(this.event.getPersister().getEntityMetamodel().getName())
-                .append(" with ID ")
-                .append(this.event.getId())
-                .append(" was committed by Hibernate. ");
-
-        log.info(sb.toString());
-    }    
+        log.info("------HIBERNATE DELETE EVENT------");
+        log.error(((OrderStuff)event.getEntity()).getExtId());
+    }
 }

@@ -19,28 +19,26 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/orders")
 public class OrderContr {
 
-	private final OrderRepo repo;
+	private final OrderServ serv;
 
     @PostMapping
     public ResponseEntity<OrderStuff> c(@Valid @RequestBody OrderStuff order) {
-    	return ResponseEntity.ok().body(repo.save(order));
+    	return ResponseEntity.ok().body(serv.cr(order));
     }
 
     @GetMapping("/{extId}")
     public ResponseEntity<OrderStuff> r(@PathVariable(value = "extId") String extId) throws RNFException {
-        OrderStuff order = repo.findByExtId(extId).orElseThrow(() -> new RNFException("No order with :: " + extId));
-        return ResponseEntity.ok().body(order);
+        return ResponseEntity.ok().body(serv.re(extId));
     }
 
     @PutMapping("/{id}") 
     public OrderStuff u(@PathVariable(value = "id") Long id, @Valid @RequestBody OrderStuff order) {
     	order.setId(id);
-        return repo.save(order);
+        return serv.up(order);
     }
     
     @DeleteMapping("/{extId}")
     public void d(@PathVariable(value = "extId") String extId) throws RNFException {
-        OrderStuff order = repo.findByExtId(extId).orElseThrow(() -> new RNFException("No order with :: " + extId));
-        repo.deleteById(order.getId());
+    	serv.de(extId);
     }
 }

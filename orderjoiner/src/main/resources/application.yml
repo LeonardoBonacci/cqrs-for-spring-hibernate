@@ -1,0 +1,23 @@
+spring.cloud.stream.bindings.process-in-0:
+  destination: orders
+spring.cloud.stream.bindings.process-in-1:
+  destination: order-stuff
+spring.cloud.stream.bindings.process-out-0:
+  destination: order-enrich
+spring.cloud.stream.kafka.streams.bindings.process-in-0:
+  consumer:
+    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+spring.cloud.stream.kafka.streams.bindings.process-in-1:
+  consumer:
+    keySerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+    valueSerde: org.apache.kafka.common.serialization.Serdes$StringSerde
+spring.cloud.stream.kafka.streams.binder:
+  brokers: localhost
+  configuration:
+    commit.interval.ms: 1000
+spring.cloud.stream.kafka.streams.binder.autoAddPartitions: true
+spring.cloud.stream.kafka.streams.binder.minPartitionCount: 1
+spring.cloud.stream.kafka.streams.binder.configuration.application.server: localhost:8080
+
+spring.application.name: order-joiner

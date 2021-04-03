@@ -36,7 +36,7 @@ public class OrderServ {
     }
     
     public void de(String extId) throws RNFException {
-        OrderStuff order = repo.findByExtId(extId).orElseThrow(() -> new RNFException("No order :: " + extId));
+        var order = repo.findByExtId(extId).orElseThrow(() -> new RNFException("No order :: " + extId));
         repo.deleteById(order.getId());
     }
 }

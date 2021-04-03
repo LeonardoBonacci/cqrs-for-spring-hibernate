@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.cqrs.kafka.KafkaTopicConfig;
 import guru.bonacci.cqrs.mvc.OrderServ;
 import guru.bonacci.cqrs.mvc.OrderStuff;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,6 @@ public class KafkaPostDeleteEventHandler extends AbstractPostDeleteEventHandler 
 
         String extId = ((OrderStuff)event.getEntity()).getExtId();
         log.info("sending tombstone to broker {}", extId);
-	    kafkaTemplate.send("major-tom", extId, null);
+	    kafkaTemplate.send(KafkaTopicConfig.TOPIC, extId, null);
     }
 }

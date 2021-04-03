@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
+import guru.bonacci.cqrs.kafka.KafkaTopicConfig;
 import guru.bonacci.cqrs.mvc.OrderServ;
 import guru.bonacci.cqrs.mvc.OrderStuff;
 import guru.bonacci.cqrs.mvc.RNFException;
@@ -22,7 +23,7 @@ public class KafkaPostUpdateEventHandler extends AbstractPostUpdateEventHandler 
         try {
         	OrderStuff stuff = serv.get((Long)event.getId());
             log.info("sending to broker {}", stuff);
-    	    kafkaTemplate.send("major-tom", stuff.getExtId(), stuff);
+    	    kafkaTemplate.send(KafkaTopicConfig.TOPIC, stuff.getExtId(), stuff);
 		} catch (RNFException e) {
 			e.printStackTrace();
 		}

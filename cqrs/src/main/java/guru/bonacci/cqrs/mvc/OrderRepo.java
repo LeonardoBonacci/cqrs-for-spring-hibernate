@@ -1,4 +1,4 @@
-package guru.bonacci.kafka.cqrs.mvc;
+package guru.bonacci.cqrs.mvc;
 
 import java.util.Optional;
 

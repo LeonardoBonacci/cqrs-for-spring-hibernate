@@ -1,4 +1,4 @@
-package guru.bonacci.kafka.cqrs;
+package guru.bonacci.cqrs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package guru.bonacci.kafka.cqrs.listener;
+package guru.bonacci.cqrs.hibernate.listener;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.hibernate.persister.entity.EntityPersister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.kafka.cqrs.handler.PostInsertEventHandler;
+import guru.bonacci.cqrs.hibernate.handler.PostInsertEventHandler;
 
 @Component
 public class InsertListener implements PostInsertEventListener {

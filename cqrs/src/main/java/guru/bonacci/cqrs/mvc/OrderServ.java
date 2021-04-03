@@ -1,4 +1,6 @@
-package guru.bonacci.kafka.cqrs.mvc;
+package guru.bonacci.cqrs.mvc;
+
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,12 @@ public class OrderServ {
 
 	private final OrderRepo repo;
 
-    public OrderStuff cr(OrderStuff order) {
-    	return repo.save(order);
+    public List<OrderStuff> all() {
+        return repo.findAll();
+    }
+
+    public OrderStuff cr(OrderStuff stuff) {
+    	return repo.save(stuff);
     }
 
     public OrderStuff get(Long id) throws RNFException {
@@ -25,8 +31,8 @@ public class OrderServ {
         return repo.findByExtId(extId).orElseThrow(() -> new RNFException("No order :: " + extId));
     }
 
-    public OrderStuff up(OrderStuff order) {
-        return repo.save(order);
+    public OrderStuff up(OrderStuff stuff) {
+        return repo.save(stuff);
     }
     
     public void de(String extId) throws RNFException {

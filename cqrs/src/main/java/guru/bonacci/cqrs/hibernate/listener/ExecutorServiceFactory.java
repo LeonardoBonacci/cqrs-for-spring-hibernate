@@ -1,4 +1,4 @@
-package guru.bonacci.kafka.cqrs.listener;
+package guru.bonacci.cqrs.hibernate.listener;
 
 import java.util.concurrent.ExecutorService;
 

@@ -1,4 +1,4 @@
-package guru.bonacci.kafka.cqrs.handler;
+package guru.bonacci.cqrs.hibernate.handler;
 
 import org.hibernate.event.spi.PostInsertEvent;
 

@@ -1,4 +1,4 @@
-package guru.bonacci.kafka.cqrs.hibernate;
+package guru.bonacci.cqrs.hibernate;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManagerFactory;
@@ -10,9 +10,9 @@ import org.hibernate.internal.SessionFactoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.kafka.cqrs.listener.DeleteListener;
-import guru.bonacci.kafka.cqrs.listener.InsertListener;
-import guru.bonacci.kafka.cqrs.listener.UpdateListener;
+import guru.bonacci.cqrs.hibernate.listener.DeleteListener;
+import guru.bonacci.cqrs.hibernate.listener.InsertListener;
+import guru.bonacci.cqrs.hibernate.listener.UpdateListener;
 
 @Component
 public class HibernateListenerConfigurer {

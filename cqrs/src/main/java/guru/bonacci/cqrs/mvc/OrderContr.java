@@ -1,4 +1,6 @@
-package guru.bonacci.kafka.cqrs.mvc;
+package guru.bonacci.cqrs.mvc;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -21,9 +23,14 @@ public class OrderContr {
 
 	private final OrderServ serv;
 
+    @GetMapping
+    public List<OrderStuff> all() {
+        return serv.all();
+    }
+
     @PostMapping
-    public ResponseEntity<OrderStuff> c(@Valid @RequestBody OrderStuff order) {
-    	return ResponseEntity.ok().body(serv.cr(order));
+    public ResponseEntity<OrderStuff> c(@Valid @RequestBody OrderStuff stuff) {
+    	return ResponseEntity.ok().body(serv.cr(stuff));
     }
 
     @GetMapping("/{extId}")
@@ -32,9 +39,9 @@ public class OrderContr {
     }
 
     @PutMapping("/{id}") 
-    public OrderStuff u(@PathVariable(value = "id") Long id, @Valid @RequestBody OrderStuff order) {
-    	order.setId(id);
-        return serv.up(order);
+    public OrderStuff u(@PathVariable(value = "id") Long id, @Valid @RequestBody OrderStuff stuff) {
+    	stuff.setId(id);
+        return serv.up(stuff);
     }
     
     @DeleteMapping("/{extId}")

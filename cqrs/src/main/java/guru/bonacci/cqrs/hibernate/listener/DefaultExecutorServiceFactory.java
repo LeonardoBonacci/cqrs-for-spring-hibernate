@@ -1,4 +1,4 @@
-package guru.bonacci.kafka.cqrs.listener;
+package guru.bonacci.cqrs.hibernate.listener;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

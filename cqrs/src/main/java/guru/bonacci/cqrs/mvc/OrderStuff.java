@@ -1,4 +1,4 @@
-package guru.bonacci.kafka.cqrs.mvc;
+package guru.bonacci.cqrs.mvc;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

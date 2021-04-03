@@ -1,33 +1,33 @@
-package guru.bonacci.kafka.cqrs.listener;
+package guru.bonacci.cqrs.hibernate.listener;
 
 import java.util.List;
 
-import org.hibernate.event.spi.PostUpdateEvent;
-import org.hibernate.event.spi.PostUpdateEventListener;
+import org.hibernate.event.spi.PostDeleteEvent;
+import org.hibernate.event.spi.PostDeleteEventListener;
 import org.hibernate.persister.entity.EntityPersister;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import guru.bonacci.kafka.cqrs.handler.PostUpdateEventHandler;
+import guru.bonacci.cqrs.hibernate.handler.PostDeleteEventHandler;
 
 @Component
-public class UpdateListener implements PostUpdateEventListener {
+public class DeleteListener implements PostDeleteEventListener {
 
 	private static final long serialVersionUID = 1L;
 
-	private final List<PostUpdateEventHandler> handlers;
+	private final List<PostDeleteEventHandler> handlers;
     private final ExecutorServiceFactory factory;
 
     @Autowired
-    public UpdateListener(List<PostUpdateEventHandler> handlers, ExecutorServiceFactory factory) {
+    public DeleteListener(List<PostDeleteEventHandler> handlers, ExecutorServiceFactory factory) {
         this.handlers = handlers;
         this.factory = factory;
     }
 
     @Override
-    public void onPostUpdate(PostUpdateEvent postUpdateEvent) {
-        for (PostUpdateEventHandler han : handlers) {
-            han.register(postUpdateEvent);
+    public void onPostDelete(PostDeleteEvent postDeleteEvent) {
+        for (PostDeleteEventHandler han : handlers) {
+            han.register(postDeleteEvent);
             this.factory.getExecutorService().execute(han);
         }
     }

@@ -1,4 +1,4 @@
-package guru.bonacci.kafka.cqrs.mvc;
+package guru.bonacci.cqrs.mvc;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

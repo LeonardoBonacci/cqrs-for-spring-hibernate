@@ -1,0 +1,1 @@
+# pluggable-cqrs-mechanism

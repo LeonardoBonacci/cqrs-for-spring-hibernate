@@ -1,4 +1,4 @@
-package guru.bonacci.rkafka.rorderjoiner.mongo;
+package guru.bonacci.rkafka.rorderjoiner;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration;

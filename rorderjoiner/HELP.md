@@ -3,8 +3,8 @@ show dbs
 use test
 show collections
 db.stuff.find()
-db.stuff.save({"extId":"Sony"})
-db.stuff.save({"extId":"Phil"})
+db.stuff.save({"stuff":"Sony", "extId":"fibo"})
+db.stuff.save({"stuff":"Phil", "extId":"nacci"})
 
 ./kafka-console-consumer \
      --bootstrap-server localhost:9092 \

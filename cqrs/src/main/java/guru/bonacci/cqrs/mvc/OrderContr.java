@@ -33,9 +33,9 @@ public class OrderContr {
     	return ResponseEntity.ok().body(serv.cr(stuff));
     }
 
-    @GetMapping("/{extId}")
-    public ResponseEntity<OrderStuff> r(@PathVariable(value = "extId") String extId) throws RNFException {
-        return ResponseEntity.ok().body(serv.re(extId));
+    @GetMapping("/{foo}")
+    public ResponseEntity<OrderStuff> r(@PathVariable(value = "foo") String foo) throws RNFException {
+        return ResponseEntity.ok().body(serv.re(foo));
     }
 
     @PutMapping("/{id}") 
@@ -44,8 +44,8 @@ public class OrderContr {
         return serv.up(stuff);
     }
     
-    @DeleteMapping("/{extId}")
-    public void d(@PathVariable(value = "extId") String extId) throws RNFException {
-    	serv.de(extId);
+    @DeleteMapping("/{foo}")
+    public void d(@PathVariable(value = "foo") String foo) throws RNFException {
+    	serv.de(foo);
     }
 }

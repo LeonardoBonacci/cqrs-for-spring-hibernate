@@ -23,7 +23,7 @@ public class KafkaPostUpdateEventHandler extends AbstractPostUpdateEventHandler 
         try {
         	OrderStuff stuff = serv.get((Long)event.getId());
             log.info("sending to broker {}", stuff);
-    	    kafkaTemplate.send(KafkaTopicConfig.TOPIC, stuff.getExtId(), stuff);
+    	    kafkaTemplate.send(KafkaTopicConfig.TOPIC, stuff.getFoo(), stuff);
 		} catch (RNFException e) {
 			e.printStackTrace();
 		}

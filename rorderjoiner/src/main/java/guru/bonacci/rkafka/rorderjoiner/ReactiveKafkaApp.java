@@ -24,9 +24,9 @@ public class ReactiveKafkaApp {
     }
 
 	static final String TOPIC_IN = "orders";
-	static final String TOPIC_OUT = "order-enrich";
+	static final String TOPIC_OUT = "orders-enrich";
 
-	private final KafkaReceiver<String, String> receiver;
+	private final KafkaReceiver<String, Order> receiver;
 	private final KafkaSender<String, String> sender;
 	private final StuffRepo repo;
 
@@ -44,11 +44,10 @@ public class ReactiveKafkaApp {
                 .doOnCancel(() -> close());
     }
     
-    // FIXME json deserialize the message and use variables
-    public Mono<ProducerRecord<String, String>> transform(String key, String o) {
-    	log.warn("search on {}", key);
-    	return repo.findFirstByExtId(key)
-			.doOnNext(stuff -> log.info("Found stuff {}", stuff.toString()))
+    public Mono<ProducerRecord<String, String>> transform(String key, Order o) {
+    	log.warn("Search for record with foo: {}", o.getFoo());
+    	return repo.findFirstByFoo(o.getFoo())
+			.doOnNext(stuff -> log.info("Found {}", stuff.toString()))
             .map(Stuff::toString)
     		.map(stuffString -> o.toString() + "<>" + stuffString)
     		.map(transformed -> new ProducerRecord<>(TOPIC_OUT, key, transformed));

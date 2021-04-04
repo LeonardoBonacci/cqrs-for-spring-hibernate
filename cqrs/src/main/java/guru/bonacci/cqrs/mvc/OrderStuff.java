@@ -20,6 +20,6 @@ import lombok.NoArgsConstructor;
 public class OrderStuff {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO) private long id;
-    @NotNull @Column private String stuff;
-    @NotNull @Column(unique = true) private String extId;
+    @NotNull @Column(unique = true) private String foo;
+    @NotNull @Column private String bar;
 }

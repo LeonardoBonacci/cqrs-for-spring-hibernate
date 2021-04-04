@@ -20,8 +20,8 @@ public class KafkaPostDeleteEventHandler extends AbstractPostDeleteEventHandler 
     public void run() {
         log.info("------HIBERNATE DELETE EVENT------");
 
-        String extId = ((OrderStuff)event.getEntity()).getExtId();
-        log.info("sending tombstone to broker {}", extId);
-	    kafkaTemplate.send(KafkaTopicConfig.TOPIC, extId, null);
+        String foo = ((OrderStuff)event.getEntity()).getFoo();
+        log.info("sending tombstone to broker {}", foo);
+	    kafkaTemplate.send(KafkaTopicConfig.TOPIC, foo, null);
     }
 }

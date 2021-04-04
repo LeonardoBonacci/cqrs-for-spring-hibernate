@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * Pointless service wrapper for demo purposes...
+ * Service wrapper for demo purposes...
  */
+@Slf4j
 @Service
 @AllArgsConstructor
 public class OrderServ {
@@ -20,6 +22,7 @@ public class OrderServ {
     }
 
     public OrderStuff cr(OrderStuff stuff) {
+    	log.info("cre {}", stuff);
     	return repo.save(stuff);
     }
 
@@ -27,16 +30,18 @@ public class OrderServ {
         return repo.findById(id).orElseThrow(() -> new RNFException("No order with id :: " + id));
     }
 
-    public OrderStuff re(String extId) throws RNFException {
-        return repo.findByExtId(extId).orElseThrow(() -> new RNFException("No order :: " + extId));
+    public OrderStuff re(String foo) throws RNFException {
+        return repo.findByFoo(foo).orElseThrow(() -> new RNFException("No order :: " + foo));
     }
 
     public OrderStuff up(OrderStuff stuff) {
+    	log.info("upd {}", stuff);
         return repo.save(stuff);
     }
     
-    public void de(String extId) throws RNFException {
-        var order = repo.findByExtId(extId).orElseThrow(() -> new RNFException("No order :: " + extId));
+    public void de(String foo) throws RNFException {
+    	log.info("del {}", foo);
+        var order = repo.findByFoo(foo).orElseThrow(() -> new RNFException("No order :: " + foo));
         repo.deleteById(order.getId());
     }
 }

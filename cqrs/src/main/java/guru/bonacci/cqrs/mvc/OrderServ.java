@@ -1,8 +1,11 @@
 package guru.bonacci.cqrs.mvc;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,14 +19,26 @@ import lombok.extern.slf4j.Slf4j;
 public class OrderServ {
 
 	private final OrderRepo repo;
+	private final KafkaTemplate<String, String> template;
 
     public List<OrderStuff> all() {
         return repo.findAll();
     }
 
+    @Transactional(transactionManager = "chainedTxM")
     public OrderStuff cr(OrderStuff stuff) {
     	log.info("cre {}", stuff);
-    	return repo.save(stuff);
+    	OrderStuff os = repo.save(stuff);
+    	try {
+			this.template.send("abc", "def").get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return os;
     }
 
     public OrderStuff get(Long id) throws RNFException {

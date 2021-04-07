@@ -1,5 +1,7 @@
 package guru.bonacci.cqrs.hibernate.handler;
 
+import java.util.concurrent.ExecutionException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
@@ -15,17 +17,17 @@ import lombok.extern.slf4j.Slf4j;
 public class KafkaPostUpdateEventHandler extends AbstractPostUpdateEventHandler {
 
 	@Autowired OrderServ serv;
-	@Autowired KafkaTemplate<String, OrderStuff> kafkaTemplate;
+//	@Autowired KafkaTemplate<String, OrderStuff> kafkaTemplate;
 	
     @Override
     public void run() {
         log.info("------HIBERNATE UPDATE EVENT------");
-        try {
-        	OrderStuff stuff = serv.get((Long)event.getId());
-            log.info("sending to broker {}", stuff);
-    	    kafkaTemplate.send(KafkaTopicConfig.TOPIC, stuff.getFoo(), stuff);
-		} catch (RNFException e) {
-			e.printStackTrace();
-		}
+//        try {
+//        	OrderStuff stuff = serv.get((Long)event.getId());
+//            log.info("sending to broker {}", stuff);
+//			kafkaTemplate.send(KafkaTopicConfig.TOPIC, stuff.getFoo(), stuff).get();
+//		} catch (RNFException | InterruptedException | ExecutionException e) {
+//			e.printStackTrace();
+//		}
     }
 }

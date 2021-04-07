@@ -14,14 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 public class KafkaPostDeleteEventHandler extends AbstractPostDeleteEventHandler {
 
 	@Autowired OrderServ serv;
-	@Autowired KafkaTemplate<String, OrderStuff> kafkaTemplate;
+//	@Autowired KafkaTemplate<String, OrderStuff> kafkaTemplate;
 	
     @Override
     public void run() {
         log.info("------HIBERNATE DELETE EVENT------");
-
-        String foo = ((OrderStuff)event.getEntity()).getFoo();
-        log.info("sending tombstone to broker {}", foo);
-	    kafkaTemplate.send(KafkaTopicConfig.TOPIC, foo, null);
+//
+//        String foo = ((OrderStuff)event.getEntity()).getFoo();
+//        log.info("sending tombstone to broker {}", foo);
+//	    kafkaTemplate.send(KafkaTopicConfig.TOPIC, foo, null);
     }
 }

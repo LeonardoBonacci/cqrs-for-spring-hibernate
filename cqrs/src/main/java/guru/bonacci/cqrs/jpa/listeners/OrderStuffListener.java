@@ -1,7 +1,5 @@
 package guru.bonacci.cqrs.jpa.listeners;
 
-import java.util.concurrent.ExecutionException;
-
 import javax.persistence.PostPersist;
 import javax.persistence.PostRemove;
 import javax.persistence.PostUpdate;
@@ -31,20 +29,16 @@ public class OrderStuffListener {
 		try {
 			stuff = serv.get(stuff.getId());
 			log.info("sending to broker '{}'", stuff);
-			this.template.send(KafkaTopicConfig.TOPIC, stuff.getFoo(), stuff).get();
-		} catch (RNFException | InterruptedException | ExecutionException e) {
+			this.template.send(KafkaTopicConfig.TOPIC, stuff.getFoo(), stuff);
+		} catch (RNFException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	@PostRemove 
 	public void remove(OrderStuff stuff) {
-		try {
-			log.info("sending tombstone to broker for key '{}'", stuff.getFoo());
-			this.template.send(KafkaTopicConfig.TOPIC, stuff.getFoo(), null).get();
-		} catch (InterruptedException | ExecutionException e) {
-			e.printStackTrace();
-		}
+		log.info("sending tombstone to broker for key '{}'", stuff.getFoo());
+		this.template.send(KafkaTopicConfig.TOPIC, stuff.getFoo(), null);
 	}
 
 }
